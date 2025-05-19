@@ -20,22 +20,28 @@ export const useGraph = () => {
         if (!graph) {
             throw new Error("GraphContext is not available");
         }
-        return getPrerequisiteNodesRecursive(graph, node);
+        const prereqs = getPrerequisiteNodesRecursive(graph, node);
+
+        const nodesAndForms = prereqs.map((prereq) => {
+            const template = getTemplate(prereq.data.component_id);
+            return { node: prereq, template };
+        });
+        return nodesAndForms;
     };
 
     return { getTemplate, getFieldPrefillOptions, graph };
 };
 
 function getPrerequisiteNodesRecursive(graph: Graph, node: Node, visited = new Map<string, Node>()) {
-  const prerequisites = node.data.prerequisites || [];
-  for (const prerequisiteId of prerequisites) {
-    if (!visited.has(prerequisiteId)) {
-      const prerequisiteNode = graph.nodes.find((n) => n.id === prerequisiteId);
-      if (prerequisiteNode) {
-        visited.set(prerequisiteId, prerequisiteNode);
-        getPrerequisiteNodesRecursive(graph, prerequisiteNode, visited);
-      }
+    const prerequisites = node.data.prerequisites || [];
+    for (const prerequisiteId of prerequisites) {
+        if (!visited.has(prerequisiteId)) {
+            const prerequisiteNode = graph.nodes.find((n) => n.id === prerequisiteId);
+            if (prerequisiteNode) {
+                visited.set(prerequisiteId, prerequisiteNode);
+                getPrerequisiteNodesRecursive(graph, prerequisiteNode, visited);
+            }
+        }
     }
-  }
-  return Array.from(visited.values());
+    return Array.from(visited.values());
 }

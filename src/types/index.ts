@@ -67,7 +67,7 @@ export type AvantosType = "button" | "checkbox-group" | "object-enum" | "short-t
 
 export interface Field {
     avantos_type: AvantosType;
-    title: string;
+    title?: string;
     type: string;
     items?: {
         enum: string[];
@@ -76,6 +76,10 @@ export interface Field {
     uniqueItems?: boolean;
     enum?: string[];
     format?: string;
+}
+
+export interface PrefilledField extends Field {
+    prefilled: string;
 }
 
 export interface Element {
