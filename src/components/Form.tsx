@@ -5,7 +5,6 @@ import { AvantosField } from "./AvantosField";
 export function Form({ node }: { node: Node }) {
     const { getTemplate } = useGraph();
     const template = getTemplate(node.data.component_id);
-    console.log("template", template);
     return (
         <>
             {Object.keys(template.field_schema.properties).map((key) => {

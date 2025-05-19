@@ -1,66 +1,49 @@
 import type { Field } from "@/types";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import MultiSelect from "./ui/multiselect";
 import { useState } from "react";
-import { Textarea } from "./ui/textarea";
+import { Database, X } from "lucide-react";
+import { Dialog, DialogContent, DialogTrigger } from "../components/ui/dialog";
+import { DialogHeader } from "./ui/dialog";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
-export function AvantosField({ field, required }: { field: Field; required: boolean }) {
+export function AvantosField({ field }: { field: Field; required: boolean }) {
+    const [prefilledField, setPrefilledField] = useState<string | null>(null);
+
+    const handleClick = () => {
+        // open a modal for prefilling
+        console.log("open modal");
+    };
+
+    const handleClear = () => {
+        setPrefilledField(null);
+    };
+
+    if (prefilledField) {
+        return (
+            <div className="flex">
+                <span>
+                    {field.title}: {prefilledField}
+                </span>
+                <X onClick={handleClear} />
+            </div>
+        );
+    }
+
     return (
-        <>
-            {(() => {
-                switch (field.avantos_type) {
-                    case "button":
-                        return <Button variant="outline">{field.title}</Button>;
-                    case "checkbox-group":
-                        return (
-                            <div>
-                                <label>{field.title}</label>
-                                <input type="checkbox" />
-                            </div>
-                        );
-                    case "object-enum": {
-                        const options =
-                            field.items?.enum.map((item) => ({
-                                value: item,
-                                label: item,
-                            })) ?? [];
-                        const selectedValues = [] as string[];
-                        return field.items?.enum && options.length > 0 ? (
-                            <MultiSelect
-                                options={options}
-                                selectedValues={selectedValues}
-                                setSelectedValues={(values) => {
-                                    console.log(values);
-                                }}
-                            />
-                        ) : null;
-                    }
-                    case "short-text":
-                        return <Input type="text" required={required} placeholder={field.title} />;
-                    case "multi-select": {
-                        const options =
-                            field.items?.enum.map((item) => ({
-                                value: item,
-                                label: item,
-                            })) ?? [];
-                        const selectedValues = [] as string[];
-                        return field.items?.enum ? (
-                            <MultiSelect
-                                options={options}
-                                selectedValues={selectedValues}
-                                setSelectedValues={(values) => {
-                                    console.log(values);
-                                }}
-                            />
-                        ) : null;
-                    }
-                    case "multi-line-text":
-                        return <Textarea required={required} placeholder={field.title} />;
-                    default:
-                        return null;
-                }
-            })()}
-        </>
+        <Dialog>
+            <DialogTrigger asChild>
+                <div className="flex" onClick={handleClick}>
+                    <Database />
+                    <span>{field.title}</span>
+                </div>
+            </DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Select a data element to map</DialogTitle>
+                </DialogHeader>
+                <div>
+                    <p>Put the options here</p>
+                </div>
+            </DialogContent>
+        </Dialog>
     );
 }
