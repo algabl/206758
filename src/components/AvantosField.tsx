@@ -28,10 +28,10 @@ export function AvantosField({ fieldKey, field, node }: { fieldKey: string; fiel
 
     if (prefilledField) {
         return (
-            <div className="m-2 gap-2 px-3 py-2 rounded-md w-full justify-start flex items-center bg-secondary text-secondary-foreground font-medium text-sm select-none">
+            <div className="m-2 gap-2 px-3 py-2 rounded-md w-full justify-start flex items-center bg-secondary text-secondary-foreground font-medium text-sm select-none h-12">
                 <Database className="w-5 h-5 text-primary mr-2" />
                 <span>
-                    {field.title}: {prefilledField}
+                    {fieldKey}: {prefilledField}
                 </span>
                 <X onClick={handleClear} className="ml-auto cursor-pointer" />
             </div>
@@ -41,7 +41,7 @@ export function AvantosField({ fieldKey, field, node }: { fieldKey: string; fiel
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="secondary" className="m-2 gap-2 px-3 py-2 rounded-md w-full justify-start">
+                <Button variant="secondary" className="m-2 gap-2 px-3 py-2 rounded-md w-full justify-start h-12">
                     <Database className="w-5 h-5 text-primary" />
                     <span className="font-medium text-sm">{fieldKey}</span>
                 </Button>

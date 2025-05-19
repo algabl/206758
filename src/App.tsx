@@ -1,4 +1,3 @@
-import "./index.css";
 import { GraphProvider } from "./context/GraphProvider";
 import { Test } from "./components/Test";
 

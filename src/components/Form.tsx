@@ -11,9 +11,10 @@ export function Form({ node }: { node: Node }) {
     const [checked, setChecked] = useState(false);
     return (
         <>
-            <div className="flex items-center">
+            <h2>Prefill</h2>
+            <div className="flex items-center justify-between">
                 <Switch id="prefill-swtich" checked={checked} onCheckedChange={setChecked} className="mb-4" />
-                <Label htmlFor="prefill-swtich">Prefill</Label>
+                <Label htmlFor="prefill-swtich">Prefill fields for this form</Label>
             </div>
             {checked && (
                 <>

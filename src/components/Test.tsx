@@ -5,7 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./
 export function Test() {
     const { graph } = useGraph();
     return (
-        <Accordion type="single" collapsible className="w-full">
+        <Accordion type="single" collapsible className="max-w-sm m-4">
             {graph?.nodes
                 ?.sort((a, b) => (a.data.name < b.data.name ? -1 : 1))
                 .map((node) => (
