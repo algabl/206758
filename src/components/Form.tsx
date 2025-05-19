@@ -9,8 +9,7 @@ export function Form({ node }: { node: Node }) {
         <>
             {Object.keys(template.field_schema.properties).map((key) => {
                 const field = template.field_schema.properties[key];
-                const fieldRequired = template.field_schema.required.includes(key);
-                return <AvantosField key={key} field={field} required={fieldRequired} />;
+                return <AvantosField key={key} field={field} node={node} />;
             })}
         </>
     );

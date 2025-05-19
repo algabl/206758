@@ -1,18 +1,16 @@
-import type { Field } from "@/types";
+import type { Field, Node } from "@/types";
 import { useState } from "react";
 import { Database, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "../components/ui/dialog";
 import { DialogHeader } from "./ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { useGraph } from "@/context/useGraph";
 
-export function AvantosField({ field }: { field: Field; required: boolean }) {
+export function AvantosField({ field, node }: { field: Field; node: Node }) {
     const [prefilledField, setPrefilledField] = useState<string | null>(null);
-
-    const handleClick = () => {
-        // open a modal for prefilling
-        console.log("open modal");
-    };
-
+    const { getFieldPrefillOptions } = useGraph();
+    const prefillOptions = getFieldPrefillOptions(node);
+    console.log("Prefill options:", prefillOptions);
     const handleClear = () => {
         setPrefilledField(null);
     };
@@ -31,7 +29,7 @@ export function AvantosField({ field }: { field: Field; required: boolean }) {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <div className="flex" onClick={handleClick}>
+                <div className="flex">
                     <Database />
                     <span>{field.title}</span>
                 </div>
