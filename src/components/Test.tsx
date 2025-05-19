@@ -2,8 +2,7 @@ import { useGraph } from "../context/useGraph";
 import { Form } from "./Form";
 
 export function Test() {
-    const graph = useGraph();
-    // console.log("Graph data:", graph);
+    const { graph } = useGraph();
     return (
         <>
             {graph?.nodes?.map((node) => (

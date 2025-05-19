@@ -63,8 +63,10 @@ export interface Form {
     dynamic_field_config: Record<string, FieldConfig>;
 }
 
+export type AvantosType = "button" | "checkbox-group" | "object-enum" | "short-text" | "multi-select" | "multi-line-text";
+
 export interface Field {
-    avantos_type: string;
+    avantos_type: AvantosType;
     title: string;
     type: string;
     items?: {
