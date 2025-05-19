@@ -1,12 +1,14 @@
 import { useGraph } from "../context/useGraph";
+import { Form } from "./Form";
 
 export function Test() {
     const graph = useGraph();
-    console.log("Graph data:", graph);
+    // console.log("Graph data:", graph);
     return (
-        <div>
-            <h1>Test</h1>
-            <p>This is a test component.</p>
-        </div>
+        <>
+            {graph?.nodes?.map((node) => (
+                <Form key={node.id} node={node} />
+            ))}
+        </>
     );
 }
