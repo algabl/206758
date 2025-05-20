@@ -15,13 +15,12 @@ export function Form({ node }: { node: Node }) {
                 <Switch id="prefill-swtich" checked={checked} onCheckedChange={setChecked} />
                 <Label htmlFor="prefill-swtich">Prefill fields for this form</Label>
             </div>
-            {checked && (
-                <>
-                    {Object.keys(template.field_schema.properties).map((key: string) => {
-                        return <AvantosField key={key} fieldKey={key} node={node} />;
-                    })}
-                </>
-            )}
+
+            <div className={checked ? "" : "hidden"}>
+                {Object.keys(template.field_schema.properties).map((key: string) => {
+                    return <AvantosField key={key} fieldKey={key} node={node} />;
+                })}
+            </div>
         </>
     );
 }
