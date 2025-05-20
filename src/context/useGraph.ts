@@ -26,7 +26,7 @@ export const useGraph = () => {
             const template = getTemplate(prereq.data.component_id);
             return { node: prereq, template };
         });
-        return nodesAndForms;
+        return nodesAndForms.sort((a, b) => (a.node.data.name < b.node.data.name ? -1 : 1));
     };
 
     return { getTemplate, getFieldPrefillOptions, graph };

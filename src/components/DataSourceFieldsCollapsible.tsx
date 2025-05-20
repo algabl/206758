@@ -3,6 +3,8 @@ import type { Field } from "@/types";
 import { useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
+// This component is used to show a collapsible list of fields from a data source.
+// It takes a title, a list of fields, and an optional onSelect callback.
 export function DataSourceFieldsCollapsible({
     title,
     fields,

@@ -1,5 +1,5 @@
 import { GraphProvider } from "./context/GraphProvider";
-import { Test } from "./components/Test";
+import { Test } from "./components/Home";
 
 function App() {
     return (

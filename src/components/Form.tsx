@@ -11,16 +11,14 @@ export function Form({ node }: { node: Node }) {
     const [checked, setChecked] = useState(false);
     return (
         <>
-            <h2>Prefill</h2>
-            <div className="flex items-center justify-between">
-                <Switch id="prefill-swtich" checked={checked} onCheckedChange={setChecked} className="mb-4" />
+            <div className="flex items-between gap-5 justify-start mb-3">
+                <Switch id="prefill-swtich" checked={checked} onCheckedChange={setChecked} />
                 <Label htmlFor="prefill-swtich">Prefill fields for this form</Label>
             </div>
             {checked && (
                 <>
                     {Object.keys(template.field_schema.properties).map((key: string) => {
-                        const field = template.field_schema.properties[key];
-                        return <AvantosField key={key} fieldKey={key} field={field} node={node} />;
+                        return <AvantosField key={key} fieldKey={key} node={node} />;
                     })}
                 </>
             )}

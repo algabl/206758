@@ -1,4 +1,4 @@
-import type { Field, Node } from "@/types";
+import type { Node } from "@/types";
 import { useEffect, useState } from "react";
 import { Database, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from "../components/ui/dialog";
@@ -8,7 +8,9 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { CLIENT_ORG_PROPERTIES } from "@/constants";
 
-export function AvantosField({ fieldKey, field, node }: { fieldKey: string; field: Field; node: Node }) {
+// This component is used for each avantos field in the form. It includes the dialg
+// For selecting a data element to map to the field.
+export function AvantosField({ fieldKey, node }: { fieldKey: string; node: Node }) {
     const [prefilledField, setPrefilledField] = useState<string | null>(null);
     const { getFieldPrefillOptions } = useGraph();
     const prefillOptions = getFieldPrefillOptions(node);
@@ -28,7 +30,7 @@ export function AvantosField({ fieldKey, field, node }: { fieldKey: string; fiel
 
     if (prefilledField) {
         return (
-            <div className="m-2 gap-2 px-3 py-2 rounded-md w-full justify-start flex items-center bg-secondary text-secondary-foreground font-medium text-sm select-none h-12">
+            <div className=" my-2 p-3 rounded-md w-full justify-start flex items-center bg-secondary text-secondary-foreground font-medium text-sm select-none h-12">
                 <Database className="w-5 h-5 text-primary mr-2" />
                 <span>
                     {fieldKey}: {prefilledField}
@@ -41,17 +43,18 @@ export function AvantosField({ fieldKey, field, node }: { fieldKey: string; fiel
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="secondary" className="m-2 gap-2 px-3 py-2 rounded-md w-full justify-start h-12">
+                <Button variant="secondary" className=" my-2 p-3 rounded-md w-full justify-start h-12">
                     <Database className="w-5 h-5 text-primary" />
                     <span className="font-medium text-sm">{fieldKey}</span>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="h-screen grid grid-rows-[auto_auto_1fr_auto] gap-0 overflow-y-auto">
+            <DialogContent className="h-auto max-h-screen grid grid-rows-[auto_auto_1fr_auto] overflow-y-auto m-5">
                 <DialogHeader className="pt-5">
                     <DialogTitle>Select a data element to map</DialogTitle>
                 </DialogHeader>
                 <Input type="text" placeholder="Search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="mb-4" />
                 <div className="overflow-y-auto">
+                    {/* If we needed to add more data sources, this is where we would do it, we can add a collapsible for each new source */}
                     <DataSourceFieldsCollapsible
                         title="Action Properties"
                         fields={CLIENT_ORG_PROPERTIES}
@@ -78,11 +81,6 @@ export function AvantosField({ fieldKey, field, node }: { fieldKey: string; fiel
                         );
                     })}
                 </div>
-                {/* <DialogFooter>
-                    <Button variant="outline" type="submit">
-                        Select
-                    </Button>
-                </DialogFooter> */}
             </DialogContent>
         </Dialog>
     );
