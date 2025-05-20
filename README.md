@@ -1,54 +1,17 @@
-# React + TypeScript + Vite
+# Journey Builder React Coding Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Run Locally
+1. Clone this repo and the [mock server](https://github.com/mosaic-avantos/frontendchallengeserver) repo.
+2. Start the mock server
+3. Run the following script:
+  ```bash
+  npm install
+  npm run dev
+  ```
+4. Open in your browser!
 
-Currently, two official plugins are available:
+## Add New Data Sources
+To add new data sources for fields, go to the [AvantosField component](https://github.com/algabl/206758/blob/main/src/components/AvantosField.tsx). Add another [DataSourceFieldsCollapsible](https://github.com/algabl/206758/blob/main/src/components/DataSourceFieldsCollapsible.tsx) into the dialog for each additional data source. Each data source collapsible needs a title and a list of fields that conform to the `Fields` interface as defined in the [types declaration file](https://github.com/algabl/206758/blob/main/src/types/index.ts).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Patterns
+The application employs a clear separation of concerns, leveraging a React Context pattern for data management. Components primarily serve as presentational elements, focusing on displaying information. Data is sourced and managed by a `GraphProvider` which wraps the application, making the necessary data accessible to consuming components through the `useGraph` hook.
