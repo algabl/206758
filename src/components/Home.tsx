@@ -2,7 +2,7 @@ import { useGraph } from "../context/useGraph";
 import { Form } from "./Form";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 
-export function Test() {
+export function Home() {
     const { graph } = useGraph();
     return (
         <div className="flex flex-col h-screen w-screen items-center">

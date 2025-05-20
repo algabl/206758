@@ -1,4 +1,4 @@
-const apiUrl = import.meta.env.VITE_API_URL;
+import { apiUrl } from "@/env";
 
 import axios from "axios";
 
