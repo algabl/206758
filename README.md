@@ -1,5 +1,7 @@
 # Journey Builder React Coding Challenge
 
+Link to video of me building this: (https://youtu.be/ICcLkrbXxbw)[https://youtu.be/ICcLkrbXxbw]
+
 ## Run Locally
 1. Clone this repo and the [mock server](https://github.com/mosaic-avantos/frontendchallengeserver) repo.
 2. Start the mock server
